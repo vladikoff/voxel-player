@@ -1,6 +1,6 @@
 {
     "name": "voxel-player",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "create a skinnable player with physics enabled",
     "main": "index.js",
     "dependencies": {

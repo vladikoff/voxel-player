@@ -62,8 +62,11 @@ module.exports = function (game) {
 };
 
 function parseXYZ (x, y, z) {
-    if (typeof x === 'object') {
-        return physics.move(x.x || x[0], x.y || x[1], x.z || x[2])
+    if (typeof x === 'object' && Array.isArray(x)) {
+        return { x: x[0], y: x[1], z: x[2] };
+    }
+    else if (typeof x === 'object') {
+        return { x: x.x || 0, y: x.y || 0, z: x.z || 0 };
     }
     return { x: Number(x), y: Number(y), z: Number(z) };
 }

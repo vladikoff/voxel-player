@@ -4,9 +4,15 @@ module.exports = function (game) {
     var mountPoint;
     var possessed;
     
-    return function (img) {
-        var player = skin(game.THREE, img).createPlayerObject();
+    return function (img, skinOpts) {
+        if (!skinOpts) {
+          skinOpts = {};
+        }
+        skinOpts.scale = skinOpts.scale || new game.THREE.Vector3(0.04, 0.04, 0.04);
+        var playerSkin = skin(game.THREE, img, skinOpts);
+        var player = playerSkin.mesh;
         var physics = game.makePhysical(player);
+        physics.playerSkin = playerSkin;
         
         player.position.set(0, 562, -20);
         game.scene.add(player);
@@ -14,7 +20,7 @@ module.exports = function (game) {
         
         physics.yaw = player;
         physics.pitch = player.head;
-        physics.subjectTo(new game.THREE.Vector3(0, -0.00009, 0));
+        physics.subjectTo(game.gravity);
         physics.blocksCreation = true;
         
         game.control(physics);

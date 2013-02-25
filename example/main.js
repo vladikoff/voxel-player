@@ -8,6 +8,7 @@ game.appendTo('#container');
 
 var createPlayer = require('../')(game);
 var substack = createPlayer('substack.png');
+substack.position.y = 1000;
 substack.possess();
 
 window.addEventListener('keydown', function (ev) {
